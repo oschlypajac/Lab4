@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using lab4.StudentModels;
 
-namespace lab4
+namespace lab4.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -24,10 +24,10 @@ namespace lab4
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
-          if (_context.Students == null)
-          {
-              return NotFound();
-          }
+            if (_context.Students == null)
+            {
+                return NotFound();
+            }
             return await _context.Students.ToListAsync();
         }
 
@@ -35,10 +35,10 @@ namespace lab4
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
         {
-          if (_context.Students == null)
-          {
-              return NotFound();
-          }
+            if (_context.Students == null)
+            {
+                return NotFound();
+            }
             var student = await _context.Students.FindAsync(id);
 
             if (student == null)
@@ -101,10 +101,10 @@ namespace lab4
         [HttpPost]
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {
-          if (_context.Students == null)
-          {
-              return Problem("Entity set 'StudentContext.Students'  is null.");
-          }
+            if (_context.Students == null)
+            {
+                return Problem("Entity set 'StudentContext.Students'  is null.");
+            }
             _context.Students.Add(student);
             await _context.SaveChangesAsync();
 
@@ -142,10 +142,10 @@ namespace lab4
         }
         private static StudentDTO StudentDTO(Student student) =>
         new StudentDTO
-            {
-                 Id = student.Id,
-                 Name = student.Name,
-                 Surname = student.Surname,
-             };
+        {
+            Id = student.Id,
+            Name = student.Name,
+            Surname = student.Surname,
+        };
     }
 }
